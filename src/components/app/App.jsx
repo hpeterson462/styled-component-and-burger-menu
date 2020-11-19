@@ -1,5 +1,24 @@
-import React from 'react';
+import React, { useState, useRef } from 'react';
+import Burger from '../app/burgerMenu/BurgerMenu';
+import Menu from '../app/menu/Menu';
+import { useOnClickOutside } from '../../hooks';
+import logo from '../../assets/logo.png';
 
-export default function App() {
-  return <h1>Hello World</h1>;
+function App() {
+  const [open, setOpen] = useState(false);
+  const node = useRef();
+  useOnClickOutside(node, () => setOpen(false));
+
+  return (
+    <>
+      <div>
+        <img src={logo} alt="logo icon" />
+      </div>
+      <div ref={node}>
+        <Burger open={open} setOpen={setOpen} />
+        <Menu open={open} setOpen={setOpen} />
+      </div>
+    </>
+  );
 }
+export default App;
